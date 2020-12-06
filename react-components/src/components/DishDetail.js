@@ -47,6 +47,7 @@ class DishDetail extends Component {
   }
 
   renderDish = (dish) => {
+    console.log('DishDetail: ', dish)
     if (dish != null) {
       return(
           <Card>
@@ -65,15 +66,20 @@ class DishDetail extends Component {
     }
   }
 
-  renderComments = (dish) => {
-    if (dish != null) {
+  renderComments = (comments) => {
+    if (comments != null) {
       return(
         <Card>
           <CardBody>
             <CardTitle>
               <h4>Comments</h4>
             </CardTitle>
-              {dish.comments.map(item => {
+              {comments.map(item => {
+                // const itemDate = {new Intl.DateTimeFormat('en-US', {
+                //                     year: 'numeric',
+                //                     month: 'short',
+                //                     day: '2-digit'
+                //                 }).format(new Date(Date.parse(commnts.date)))}
                 const itemDate = moment(item.date).format('DD-MM-YYYY')
                 return(
                   <div key={item.id}>
@@ -96,7 +102,7 @@ class DishDetail extends Component {
   }
 
   render() {
-    const { dish } = this.props
+    const { dish, comments } = this.props
 
     if(dish!=null) {
       return(
@@ -105,14 +111,16 @@ class DishDetail extends Component {
             {this.renderDish(dish)}
           </Col>
           <Col xs="6">
-            {this.renderComments(dish)}
+            {this.renderComments(comments)}
           </Col>
         </Row>
       )
     }
     else {
       return(
-        <div></div>
+        <div>
+          <p>dish is null</p>
+        </div>
       )
     }
   }

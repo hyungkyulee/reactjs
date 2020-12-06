@@ -1,31 +1,56 @@
-import React, { Component } from 'react';
-import './App.css';
-import { Navbar, NavbarBrand } from 'reactstrap'
-import { DISHES } from './common/dishes'
-import Menu from './components/Menu'
+import React, { Component } from 'react'
+import './App.css'
+import { BrowserRouter } from 'react-router-dom'
+import Main from './screens/Main'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      dishes: DISHES
-    }
-  }
 
-  render() {
+  render() {  
     return (
-      <div className='App'>
-        <Navbar dark color='primary'>
-          <div className='container'>
-            <NavbarBrand href='/'>The First Assignment - React Components</NavbarBrand>
-          </div>
-        </Navbar>
-
-        <Menu dishes={this.state.dishes} />
-
-      </div>
-    )
+        <BrowserRouter>
+            <div className="App">
+                <Main /> 
+            </div>
+        </BrowserRouter>
+    );
   }
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     dishes: DISHES
+  //   }
+  // }
+
+  // render() {
+  //   return (
+  //     <>
+  //       <BrowserRouter>
+  //         <div className='App'>
+  //           <Navbar dark color='primary'>
+  //             <div className='container'>
+  //               <NavbarBrand href='/'>The First Assignment - React Components</NavbarBrand>
+  //             </div>
+  //           </Navbar>
+
+  //           <Header />
+
+  //           <Switch>
+  //             <Route path='/home' component={Home} />
+  //             <Route exat path='/menu' component={() => <Menu dishes={this.state.dishes} />} />
+  //             <Route path='/contact' component={Contact} />
+  //             <Redirect to='/home' />
+  //           </Switch>
+
+  //           <Footer />
+
+  //         </div>
+
+          
+  //       </BrowserRouter>
+  //     </>
+  //   )
+  // }
+
 }
 
 export default App;
