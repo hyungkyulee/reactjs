@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Home from './Home'
 import Menu from './Menu'
 import Contact from './Contact'
-// import About from './AboutComponent';
 import DishDetail from '../components/DishDetail'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -11,6 +10,7 @@ import { COMMENTS } from '../common/comments'
 import { PROMOTIONS } from '../common/promotions'
 import { LEADERS } from '../common/leaders'
 import { Switch, Route, Redirect } from 'react-router-dom'
+import AboutUs from './AboutUs'
 
 class Main extends Component {
 
@@ -53,7 +53,7 @@ class Main extends Component {
                         <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes} />} /> 
                         <Route path="/menu/:dishId" component={DishWithId} />
                         <Route exact path="/contactus" component={() => <Contact />} />
-                        {/* <Route exact path="/aboutus" component={() => <About leaders={this.state.leaders} />} /> */}
+                        <Route exact path="/aboutus" component={() => <AboutUs leaders={this.state.leaders} />} />
                         <Redirect to="/home" />  
                     </Switch>
                 <Footer />
