@@ -1,9 +1,159 @@
 import React, { Component } from 'react';
+import { 
+    Col, 
+    Form, 
+    FormGroup, 
+    Label, 
+    Input,
+    Button
+} from 'reactstrap';
 
 class Contact extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            firstName: '',
+            lastName: '',
+            phoneNumber: '',
+            email: '',
+            agree: false,
+            contactType: 'Tel.',
+            message: ''
+        }
+    }
+
+    handleInputchange = (event) => {
+        const target = event.target
+        const value = (target.type === 'checkbox') ? target.checked : target.value
+        const name = target.name
+
+        this.setState({
+            [name]: value
+        })
+    }
+
+    handleSubmit = (event) => {
+        console.log('current state is: ', JSON.stringify(this.state))
+        alert('current state is: ' + JSON.stringify(this.state))
+        event.preventDefault();
+    }
+
     render () {
       return(
           <div className="container">
+              <div className="col-12">
+                  <h3>Send us your feedback</h3>
+              </div>
+              <div className="col-12 col-md-9">
+                  <Form onSubmit={this.handleSubmit}>
+                    <FormGroup row>
+                        <Label htmlFor="firstName" md={2}>
+                            First Name
+                        </Label>
+                        <Col md={10}>
+                            <Input type="text"
+                                id="firstName"
+                                name="firstName"
+                                placeholder="First Name"
+                                value={this.state.firstName}
+                                onChange={this.handleInputchange} 
+                            />
+                        </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Label htmlFor="lastName" md={2}>
+                            Last Name
+                        </Label>
+                        <Col md={10}>
+                            <Input type="text"
+                                id="lastName"
+                                name="lastName"
+                                placeholder="Last Name"
+                                value={this.state.lastName}
+                                onChange={this.handleInputchange} 
+                            />
+                        </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Label htmlFor="phoneNumber" md={2}>
+                            Phone Number
+                        </Label>
+                        <Col md={10}>
+                            <Input type="text"
+                                id="phoneNumber"
+                                name="phoneNumber"
+                                placeholder="Phone Number"
+                                value={this.state.phoneNumber}
+                                onChange={this.handleInputchange} 
+                            />
+                        </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Label htmlFor="email" md={2}>
+                            Email
+                        </Label>
+                        <Col md={10}>
+                            <Input type="text"
+                                id="email"
+                                name="email"
+                                placeholder="Email"
+                                value={this.state.email}
+                                onChange={this.handleInputchange} 
+                            />
+                        </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Col md={{size: 6, offset: 2}}>
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox"
+                                        name="agree"
+                                        value={this.state.agree}
+                                        onChange={this.handleInputchange} 
+                                    />
+                                    {' '}
+                                    <strong>May we contact you?</strong>
+                                </Label>
+                            </FormGroup>
+                        </Col>
+                        <Col md={{size: 3, offset: 1}}>
+                            <Input type="select"
+                                name="contactType"
+                                value={this.state.contactType}
+                                onChange={this.handleInputchange} 
+                            >
+                                <option>Tel.</option>
+                                <option>Email</option>
+                            </Input>
+                        </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Label htmlFor="message" md={2}>
+                            Message
+                        </Label>
+                        <Col md={10}>
+                            <Input type="text"
+                                id="message"
+                                name="message"
+                                placeholder="Message"
+                                value={this.state.message}
+                                onChange={this.handleInputchange} 
+                            />
+                        </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Col md={{size:10, offset:2}}>
+                            <Button
+                                type="submit"
+                                color="primary"
+                                >
+                                Send feedback
+                            </Button>
+                        </Col>
+                    </FormGroup>
+                  </Form>
+              </div>
+              
               <div className="row row-content">
                   <div className="col-12">
                   <h3>Location Information</h3>
