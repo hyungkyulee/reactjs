@@ -18,7 +18,13 @@ class Contact extends Component {
             email: '',
             agree: false,
             contactType: 'Tel.',
-            message: ''
+            message: '',
+            blur: {
+                firstname: false,
+                lastname: false,
+                phonenumber: false,
+                email: false
+            }
         }
     }
 
@@ -38,13 +44,50 @@ class Contact extends Component {
         event.preventDefault();
     }
 
+    handleBlur = (field) => (event) => {
+        this.setState({
+            blur: {...this.state.blur, [field]: true}
+        })
+    }
+    validate = (firstname, lastname, phonenumber, email) => {
+        const errors = {
+            firstname: '',
+            lastname: '',
+            phonenumber: '',
+            email: ''
+        }
+
+        if (this.state.blur.firstname && firstname.length < 3)
+            errors.firstname = 'First Name should be >= 3 characters'
+        else if (this.state.blur.firstname && firstname.length > 10)
+            errors.firstname = 'First Name should be <= 10 characters'
+
+        if (this.state.blur.lastname && lastname.length < 3)
+            errors.lastname = 'Last Name should be >= 3 characters'
+        else if (this.state.blur.lastname && lastname.length > 10)
+            errors.lastname = 'Last Name should be <= 10 characters'
+
+        const regex = /^\d+$/
+        if(this.state.blur.phonenumber && !regex.test(phonenumber))
+            errors.phonenumber = 'Tel. Number should contain only numbers'
+
+        if(this.state.blur.email && email.split('').filter(x => x ==='@').length !== 1)
+            errors.email = 'Email should contain a @'
+
+        return errors
+    }
+
     render () {
+        const errors = this.validate(this.state.firstName, 
+                                    this.state.lastName, 
+                                    this.state.phoneNumber,
+                                    this.state.email)
       return(
           <div className="container">
               <div className="col-12">
                   <h3>Send us your feedback</h3>
               </div>
-              <div className="col-12 col-md-9">
+              <div className="col-12 col-md-12">
                   <Form onSubmit={this.handleSubmit}>
                     <FormGroup row>
                         <Label htmlFor="firstName" md={2}>
@@ -56,7 +99,10 @@ class Contact extends Component {
                                 name="firstName"
                                 placeholder="First Name"
                                 value={this.state.firstName}
-                                onChange={this.handleInputchange} 
+                                onChange={this.handleInputchange}
+                                onBlur={this.handleBlur('firstname')}
+                                valid={errors.firstname === ''}
+                                invalid={errors.firstname !== ''}
                             />
                         </Col>
                     </FormGroup>
@@ -71,6 +117,9 @@ class Contact extends Component {
                                 placeholder="Last Name"
                                 value={this.state.lastName}
                                 onChange={this.handleInputchange} 
+                                onBlur={this.handleBlur('lastname')}
+                                valid={errors.lastname === ''}
+                                invalid={errors.lastname !== ''}
                             />
                         </Col>
                     </FormGroup>
@@ -85,6 +134,9 @@ class Contact extends Component {
                                 placeholder="Phone Number"
                                 value={this.state.phoneNumber}
                                 onChange={this.handleInputchange} 
+                                onBlur={this.handleBlur('phonenumber')}
+                                valid={errors.phonenumber === ''}
+                                invalid={errors.phonenumber !== ''}
                             />
                         </Col>
                     </FormGroup>
@@ -98,7 +150,10 @@ class Contact extends Component {
                                 name="email"
                                 placeholder="Email"
                                 value={this.state.email}
-                                onChange={this.handleInputchange} 
+                                onChange={this.handleInputchange}
+                                onBlur={this.handleBlur('email')} 
+                                valid={errors.email === ''}
+                                invalid={errors.email !== ''}
                             />
                         </Col>
                     </FormGroup>
