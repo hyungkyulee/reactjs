@@ -12,6 +12,7 @@ import {
 } from 'reactstrap'
 import { DISHES } from '../common/dishes'
 import moment from 'moment'
+import CommentForm from './CommentForm'
 
 /**************** 
   Functional way
@@ -93,6 +94,7 @@ class DishDetail extends Component {
                 )
               })}
           </CardBody>
+          <CommentForm />
         </Card>
       )
     }
