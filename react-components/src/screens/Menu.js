@@ -12,6 +12,7 @@ import {
 } from 'reactstrap'
 import DishDetail from '../components/DishDetail';
 import { Link } from 'react-router-dom'
+import { Loading } from '../components/Loading';
 
 class Menu extends Component {
   constructor(props) {
@@ -43,18 +44,30 @@ class Menu extends Component {
 
   render() {
     const menu = this.props.dishes.map((dish) => {
-      return (
-        <Col xs="6">
-          <Card key={dish.id} >
-            <Link to={`/menu/${dish.id}`} >
-              <CardImg width="100%" src={dish.image} alt={dish.name} />
-              <CardImgOverlay>
-                <CardTitle>{dish.name}</CardTitle>
-              </CardImgOverlay>
-            </Link>
-          </Card>
-        </Col>
-      )
+      if (this.props.dishesLoading) {
+        return(
+            <Loading />
+        )
+      }
+      else if (this.props.dishesErrorMessage) {
+        return(
+            <h4>{this.props.dishesErrorMessage}</h4>
+        )
+      }
+      else {
+        return (
+          <Col xs="6">
+            <Card key={dish.id} >
+              <Link to={`/menu/${dish.id}`} >
+                <CardImg width="100%" src={dish.image} alt={dish.name} />
+                <CardImgOverlay>
+                  <CardTitle>{dish.name}</CardTitle>
+                </CardImgOverlay>
+              </Link>
+            </Card>
+          </Col>
+        )
+      }
     })
 
     return (

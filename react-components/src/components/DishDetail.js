@@ -13,6 +13,7 @@ import {
 import { DISHES } from '../common/dishes'
 import moment from 'moment'
 import CommentForm from './CommentForm'
+import { Loading } from './Loading'
 
 /**************** 
   Functional way
@@ -47,9 +48,19 @@ class DishDetail extends Component {
     }
   }
 
-  renderDish = (dish) => {
+  renderDish = (dish, loading, error) => {
     console.log('DishDetail: ', dish)
-    if (dish != null) {
+    if (loading) {
+      return(
+          <Loading />
+      )
+    }
+    else if (error) {
+      return(
+          <h4>{error}</h4>
+      )
+    }
+    else if (dish != null) {
       return(
           <Card>
               <CardImg top src={dish.image} alt={dish.name} />
@@ -58,7 +69,7 @@ class DishDetail extends Component {
                 <CardText>{dish.description}</CardText>
               </CardBody>
           </Card>
-      );
+      )
     }
     else {
       return(
@@ -107,13 +118,13 @@ class DishDetail extends Component {
   }
 
   render() {
-    const { dish, comments } = this.props
+    const { dish, dishesLoading, dishesErrorMessage, comments } = this.props
 
     if(dish!=null) {
       return(
         <Row>
           <Col xs="6">
-            {this.renderDish(dish)}
+            {this.renderDish(dish, dishesLoading, dishesErrorMessage)}
           </Col>
           <Col xs="6">
             {this.renderComments(dish.id, comments)}

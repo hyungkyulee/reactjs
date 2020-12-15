@@ -1,5 +1,5 @@
 import {COMMENTS} from '../common/comments'
-import * as ActionTypes from './actionType'
+import * as ActionTypes from './actionTypes'
 
 export const Comments = (state = COMMENTS, action) => {
   switch(action.type) {
@@ -9,7 +9,7 @@ export const Comments = (state = COMMENTS, action) => {
       comment.date = new Date().toISOString()
       console.log('comment: ', comment)
       return state.concat(comment)
-      
+
     default:
       return state
   }

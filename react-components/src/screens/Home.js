@@ -7,21 +7,37 @@ import {
     CardTitle, 
     CardSubtitle
 } from 'reactstrap'
+import { Loading } from '../components/Loading'
   
   
-function RenderCard({item}) {
+function RenderCard({item, loading, error}) {
 
-    return(
-        (item) &&
-        <Card>
-            <CardImg src={item.image} alt={item.name} />
-            <CardBody>
-            <CardTitle>{item.name}</CardTitle>
+    if (loading) {
+        return(
+            <Loading />
+        )
+    }
+    else if (error) {
+        return(
+            <>
+            <h4>{error}</h4>
+            <p>error</p>
+            </>
+        )
+    }
+    else {
+        return(
+            (item) &&
+            <Card>
+                <CardImg src={item.image} alt={item.name} />
+                <CardBody>
+                <CardTitle>{item.name}</CardTitle>
                 {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null }
-            <CardText>{item.description}</CardText>
-            </CardBody>
-        </Card>
-    )
+                <CardText>{item.description}</CardText>
+                </CardBody>
+            </Card>
+        )
+    }
 
 }
 
@@ -35,7 +51,7 @@ class Home extends Component {
       <div className="container">
           <div className="row align-items-start">
               <div className="col-12 col-md m-1">
-                  <RenderCard item={this.props.dish} />
+                  <RenderCard item={this.props.dish} loading={this.props.dishesLoading} error={this.props.dishesErrorMessage} />
               </div>
               <div className="col-12 col-md m-1">
                   <RenderCard item={this.props.promotion} />
