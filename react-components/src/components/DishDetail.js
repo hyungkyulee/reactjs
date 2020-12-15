@@ -67,7 +67,7 @@ class DishDetail extends Component {
     }
   }
 
-  renderComments = (comments) => {
+  renderComments = (dishId, comments) => {
     if (comments != null) {
       return(
         <Card>
@@ -94,7 +94,10 @@ class DishDetail extends Component {
                 )
               })}
           </CardBody>
-          <CommentForm />
+          <CommentForm dishId={dishId}
+            comments={comments}
+            addComment={this.props.addComment}
+          />
         </Card>
       )
     }
@@ -113,7 +116,7 @@ class DishDetail extends Component {
             {this.renderDish(dish)}
           </Col>
           <Col xs="6">
-            {this.renderComments(comments)}
+            {this.renderComments(dish.id, comments)}
           </Col>
         </Row>
       )

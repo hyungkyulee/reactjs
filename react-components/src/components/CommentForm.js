@@ -34,6 +34,8 @@ class CommentForm extends Component {
 
     console.log('Added comments : ', JSON.stringify(values))
     alert('Added comments : ' + JSON.stringify(values))
+
+    this.props.addComment(this.props.dishId, values.rating, values.authr, values.comment)
   }
 
   renderComments = () => {
