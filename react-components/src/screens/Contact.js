@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
     Row,
     Col, 
-    Form, 
     FormGroup, 
     Label, 
     Input,
@@ -11,6 +10,7 @@ import {
 import {
   Control, 
   LocalForm,
+  Form,
   Errors
 } from 'react-redux-form'
 
@@ -25,6 +25,8 @@ class Contact extends Component {
   handleSubmit = (values) => {
       console.log('current state is: ', JSON.stringify(values))
       alert('current state is: ' + JSON.stringify(values))
+
+      this.props.resetContactForm()
   }
 
   handleBlur = (field) => (event) => {
@@ -41,7 +43,7 @@ class Contact extends Component {
                 <h3>Send us your feedback</h3>
             </div>
             <div className="col-12 col-md-12">
-                <LocalForm onSubmit={values => this.handleSubmit(values)}>
+                <Form model="contactForm" onSubmit={values => this.handleSubmit(values)}>
                   <Row className="form-group">
                       <Label htmlFor="firstName" md={2}>
                           First Name
@@ -197,7 +199,7 @@ class Contact extends Component {
                           </Button>
                       </Col>
                   </Row>
-                </LocalForm>
+                </Form>
             </div>
             
             <div className="content">
