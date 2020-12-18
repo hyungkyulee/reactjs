@@ -14,6 +14,7 @@ import { DISHES } from '../common/dishes'
 import moment from 'moment'
 import CommentForm from './CommentForm'
 import { Loading } from './Loading'
+import { baseUrl } from '../common/baseUrl'
 
 /**************** 
   Functional way
@@ -63,7 +64,7 @@ class DishDetail extends Component {
     else if (dish != null) {
       return(
           <Card>
-              <CardImg top src={dish.image} alt={dish.name} />
+              <CardImg top src={baseUrl + dish.image} alt={dish.name} />
               <CardBody>
                 <CardTitle>{dish.name}</CardTitle>
                 <CardText>{dish.description}</CardText>

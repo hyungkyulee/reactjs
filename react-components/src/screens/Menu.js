@@ -13,6 +13,7 @@ import {
 import DishDetail from '../components/DishDetail';
 import { Link } from 'react-router-dom'
 import { Loading } from '../components/Loading';
+import { baseUrl } from '../common/baseUrl'
 
 class Menu extends Component {
   constructor(props) {
@@ -59,7 +60,7 @@ class Menu extends Component {
           <Col xs="6">
             <Card key={dish.id} >
               <Link to={`/menu/${dish.id}`} >
-                <CardImg width="100%" src={dish.image} alt={dish.name} />
+                <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
                 <CardImgOverlay>
                   <CardTitle>{dish.name}</CardTitle>
                 </CardImgOverlay>
