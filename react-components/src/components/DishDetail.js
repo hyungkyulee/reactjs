@@ -15,6 +15,7 @@ import moment from 'moment'
 import CommentForm from './CommentForm'
 import { Loading } from './Loading'
 import { baseUrl } from '../common/baseUrl'
+import { FadeTransform, Fade, Stagger } from 'react-animation-components'
 
 /**************** 
   Functional way
@@ -63,6 +64,7 @@ class DishDetail extends Component {
     }
     else if (dish != null) {
       return(
+          <FadeTransform in transformProps={{exitTransform: 'scale(0.5) translateY(-50%)'}}>
           <Card>
               <CardImg top src={baseUrl + dish.image} alt={dish.name} />
               <CardBody>
@@ -70,6 +72,7 @@ class DishDetail extends Component {
                 <CardText>{dish.description}</CardText>
               </CardBody>
           </Card>
+          </FadeTransform>
       )
     }
     else {
@@ -87,6 +90,7 @@ class DishDetail extends Component {
             <CardTitle>
               <h4>Comments</h4>
             </CardTitle>
+              <Stagger in>
               {comments.map(item => {
                 // const itemDate = {new Intl.DateTimeFormat('en-US', {
                 //                     year: 'numeric',
@@ -95,6 +99,7 @@ class DishDetail extends Component {
                 //                 }).format(new Date(Date.parse(commnts.date)))}
                 const itemDate = moment(item.date).format('DD-MM-YYYY')
                 return(
+                  <Fade in>
                   <div key={item.id}>
                     <CardText>
                       {item.comment}
@@ -103,8 +108,10 @@ class DishDetail extends Component {
                       {item.author} {itemDate}
                     </CardFooter>
                   </div>
+                  </Fade>
                 )
               })}
+              </Stagger>
           </CardBody>
           <CommentForm dishId={dishId}
             comments={comments}
