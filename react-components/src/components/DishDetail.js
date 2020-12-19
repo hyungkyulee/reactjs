@@ -108,7 +108,7 @@ class DishDetail extends Component {
           </CardBody>
           <CommentForm dishId={dishId}
             comments={comments}
-            addComment={this.props.addComment}
+            postComment={this.props.postComment}
           />
         </Card>
       )

@@ -9,7 +9,7 @@ import Footer from '../components/Footer'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import AboutUs from './AboutUs'
-import { addComment, fetchDishes, fetchComments, fetchPromos } from '../redux/actionCreators'
+import { postComment, fetchDishes, fetchComments, fetchPromos } from '../redux/actionCreators'
 import { actions } from 'react-redux-form'
 
 const mapStateToProps = state => {
@@ -23,7 +23,7 @@ const mapStateToProps = state => {
 
 // assignment expression for a function
 const mapDispatchToProps = dispatch => ({
-    addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
+    postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
     fetchDishes: () => { dispatch(fetchDishes()) },
     resetContactForm: () => { dispatch(actions.reset('contactForm'))},
     fetchComments: () => dispatch(fetchComments()),
@@ -69,7 +69,7 @@ class Main extends Component {
                   dishesErrorMessage={this.props.dishes.errorMessage}
                   comments={this.props.comments.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))}
                   commentsErrMess={this.props.comments.errorMessage}
-                  addComment={this.props.addComment}
+                  postComment={this.props.postComment}
                 />
             );
         }  

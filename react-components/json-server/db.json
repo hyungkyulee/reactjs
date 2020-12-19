@@ -201,6 +201,13 @@
       "comment": "It's your birthday, we're gonna party!",
       "author": "25 Cent",
       "date": "2011-12-02T17:57:28.556094Z"
+    },
+    {
+      "dishId": 0,
+      "rating": "5",
+      "comment": "Fantastic taste..... ",
+      "date": "2020-12-19T14:44:50.260Z",
+      "id": 20
     }
   ],
   "promotions": [

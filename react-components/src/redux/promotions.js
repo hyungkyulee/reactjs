@@ -1,4 +1,4 @@
-import {PROMOTIONS} from '../common/promotions'
+// import {PROMOTIONS} from '../common/promotions'
 import * as ActionTypes from './actionTypes'
 
 export const Promotions = (state = {isLoading: true, errorMessage: null, promotions: []}, action) => {
