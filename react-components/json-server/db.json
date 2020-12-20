@@ -208,6 +208,12 @@
       "comment": "Fantastic taste..... ",
       "date": "2020-12-19T14:44:50.260Z",
       "id": 20
+    },
+    {
+      "dishId": 0,
+      "comment": "test test",
+      "date": "2020-12-20T00:42:00.565Z",
+      "id": 21
     }
   ],
   "promotions": [
@@ -263,7 +269,7 @@
     {
       "firstname": "fdas",
       "lastname": "afds",
-      "telnum": "134113",
+      "phonenumber": "134113",
       "email": "dafdads@daffas.dfdafd",
       "agree": true,
       "contactType": "Email",

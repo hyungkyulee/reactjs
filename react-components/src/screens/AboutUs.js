@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap'
 import { Link } from 'react-router-dom'
+import { Loading } from '../components/Loading'
+import { baseUrl } from '../common/baseUrl'
+import { FadeTransform, Fade, Stagger } from 'react-animation-components'
 
 class AboutUs extends Component {
 
@@ -8,12 +11,13 @@ class AboutUs extends Component {
     super(props)
   }
 
-  RenderLeader = (leader) => {
+  
+  RenderLeader = (key, leader) => {
     return(
-        <div key={leader.id} className="col-12 mt-5">
+        <div key={key} className="col-12 mt-5">
             <Media tag="li">
                 <Media left middle>
-                    <Media object src={leader.image} alt={leader.name} />
+                    <Media object src={baseUrl + leader.image} alt={leader.name} />
                 </Media>
                 <Media body className="col-12">
                     <Media heading>{leader.name}</Media>
@@ -26,11 +30,33 @@ class AboutUs extends Component {
   }
 
   render() {
+    // const leaders = this.props.leaders.map((leader) => {
+    //     return (
+    //         this.RenderLeader(leader)
+    //     )
+    // })
+
     const leaders = this.props.leaders.map((leader) => {
-        return (
-            this.RenderLeader(leader)
-        )
-    })
+        if (this.props.leadersLoading) {
+          return(
+              <Loading />
+          )
+        }
+        else if (this.props.leadersErrorMessage) {
+          return(
+              <h4>{this.props.leadersErrorMessage}</h4>
+          )
+        }
+        else {
+          return (
+            <Stagger in>
+                <Fade in key={leader.id}>
+                {this.RenderLeader(leader.id, leader)}
+                </Fade>
+            </Stagger>
+          )
+        }
+      })
 
     return(
         <div className="container">

@@ -10,9 +10,9 @@ import {
   CardBody, 
   CardTitle
 } from 'reactstrap'
-import DishDetail from '../components/DishDetail';
+import DishDetail from '../components/DishDetail'
 import { Link } from 'react-router-dom'
-import { Loading } from '../components/Loading';
+import { Loading } from '../components/Loading'
 import { baseUrl } from '../common/baseUrl'
 
 class Menu extends Component {

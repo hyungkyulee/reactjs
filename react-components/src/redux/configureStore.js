@@ -7,6 +7,7 @@ import { Leaders } from './leaders'
 import { Promotions } from './promotions'
 import { createForms } from 'react-redux-form'
 import { InitialContactForm } from './forms'
+import { Feedbacks } from './feedback'
 
 export const ConfigureStore = () => {
   const store = createStore(
@@ -17,7 +18,8 @@ export const ConfigureStore = () => {
       promotions: Promotions,
       ...createForms({
         contactForm: InitialContactForm
-      })
+      }),
+      feedbacks: Feedbacks
     }),
     applyMiddleware(thunk, logger)
   )
